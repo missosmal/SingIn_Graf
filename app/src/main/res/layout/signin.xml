@@ -78,6 +78,7 @@
         android:layout_marginRight="80dp"
         android:layout_marginTop="50dp"
         android:text="Sing In"
+        android:background="@drawable/radius_button"
         android:textColor="@color/black"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
