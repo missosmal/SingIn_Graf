@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Forgot your password?"
+        android:onClick="onAuthorization"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
