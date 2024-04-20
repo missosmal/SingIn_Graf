@@ -1,14 +1,16 @@
 package com.example.singin_graf;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.view.MotionEvent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
+import android.os.AsyncTask;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAuthorization(View view)
     {
-        TextView tv_login = findViewById(R.id.editTextTextPersonNane);
+        TextView tv_login = findViewById(R.id.loginAuth);
         login = tv_login.getText().toString();
 
-        TextView tv_password = findViewById(R.id.editTextTextPersonName2);
+        TextView tv_password = findViewById(R.id.passwordAuth);
         password = tv_password.getText().toString();
 
         GetDataUser gdu = new GetDataUser();
@@ -75,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
         public String getPassword(){return this.password;}
     }
     ArrayList<DataUser> dataUser = new ArrayList();
-    class GetDataUser extends  AsyncTasl<Void, Void, Void>
+    class GetDataUser extends AsyncTask<Void, Void, Void>
     {
         String body;
         @Override
-        protected Void doInBackgroumd(Void... params)
+        protected Void doInBackground(Void... params)
         {
             Document doc_b = null;
             try
@@ -129,12 +131,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onRegistration(View view)
     {
-        TextView tv_login = findViewById(R.id.edtTextTextPersonName);
-        TextView tv_password = findViewById(R.id.edtTextTextPersonName2);
-        TextView tv_password2 = findViewById(R.id.edtTextTextPersonName3);
+        TextView tv_login = findViewById(R.id.login);
+        TextView tv_password = findViewById(R.id.password);
+        TextView tv_password2 = findViewById(R.id.repeatPassword);
 
         String a = tv_password.getText().toString();
-        String a = tv_password2.getText().toString();
+        String b = tv_password2.getText().toString();
         if(a.contains(b))
         {
             login = tv_login.getText().toString();
@@ -148,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     {
         String body;
         @Override
-        protected void doInBackground(Void... params)
+        protected Void doInBackground(Void... params)
         {
             Document doc_b = null;
             try
@@ -174,6 +176,24 @@ public class MainActivity extends AppCompatActivity {
                 else if(body.contains("1")) AlertDialog("Авторизация", "Пользователь зарегистрирован.");
             } else AlertDialog("Авторизация", "Ошибка данных.");
         }
+    }
+    public void AlertDialog(String title, String message)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setNegativeButton("OK",
+                    new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public  void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.cancel();
+                        }
+                    });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
 

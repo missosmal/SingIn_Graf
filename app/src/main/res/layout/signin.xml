@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
     <EditText
-        android:id="@+id/login"
+        android:id="@+id/loginAuth"
         android:background="@drawable/radius_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,10 +53,10 @@
         android:layout_marginTop="20dp"
         android:text="Password:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/loginAuth"
         />
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/passwordAuth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/radius_button"
@@ -83,7 +83,7 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintTop_toBottomOf="@+id/passwordAuth"
         />
     <TextView
         android:id="@+id/restoreAccount"
