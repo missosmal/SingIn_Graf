@@ -127,6 +127,54 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    public void onRegistration(View view)
+    {
+        TextView tv_login = findViewById(R.id.edtTextTextPersonName);
+        TextView tv_password = findViewById(R.id.edtTextTextPersonName2);
+        TextView tv_password2 = findViewById(R.id.edtTextTextPersonName3);
+
+        String a = tv_password.getText().toString();
+        String a = tv_password2.getText().toString();
+        if(a.contains(b))
+        {
+            login = tv_login.getText().toString();
+            password = tv_password.getText().toString();
+
+            SetDataUser sdu = new SetDataUser();
+            sdu.execute();
+        } else AlertDialog("Авторизация", "Пароли не совпадают");
+    }
+    class SetDataUser extends AsyncTask<Void, Void, Void>
+    {
+        String body;
+        @Override
+        protected void doInBackground(Void... params)
+        {
+            Document doc_b = null;
+            try
+            {
+                doc_b = Jsoup.connect("https://"+login+"&password="+password).get();
+            } catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            if(doc_b != null)
+            {
+                body = doc_b.text();
+            } else body = "Ошибка!";
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            super.onPostExecute(result);
+            if(body.length() != 0)
+            {
+                if(body.contains("0")) AlertDialog("Авторизация", "Пользователь с таким логином существует.");
+                else if(body.contains("1")) AlertDialog("Авторизация", "Пользователь зарегистрирован.");
+            } else AlertDialog("Авторизация", "Ошибка данных.");
+        }
+    }
 }
 
 
