@@ -75,4 +75,59 @@ public class MainActivity extends AppCompatActivity {
         public String getPassword(){return this.password;}
     }
     ArrayList<DataUser> dataUser = new ArrayList();
+    class GetDataUser extends  AsyncTasl<Void, Void, Void>
+    {
+        String body;
+        @Override
+        protected Void doInBackgroumd(Void... params)
+        {
+            Document doc_b = null;
+            try
+            {
+                doc_b = Jsoup.connect("https://" + login +"&password="+password).get();
+            } catch(IOException e)
+            {
+                e.printStackTrace();
+            }
+            if(doc_b != null)
+            {
+                body = doc_b.text();
+            } else body = "Ошибка!";
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            super.onPostExecute(result);
+            try
+            {
+                if(body.length() != 0)
+                {
+                    JSONArray jsonArray = new JSONArray(body);
+                    dataUser.clear();
+                    for(int i = 0; i<jsonArray.length();i++)
+                    {
+                        JSONObject jsonRead = jsonArray.getJSONObject(i);
+
+                        DataUser duUser = new DataUser();
+                        duUser.setId(jsonRead.getString("id"));
+                        duUser.setLogin(jsonRead.getString("login"));
+                        duUser.setPassword(jsonRead.getString("password"));
+
+                        dataUser.add(duUser);
+                    }
+                    if(dataUser.size() != 0)
+                    {
+                      AlertDialog("Авторизация", "Пользователь авторизован.");
+                    } else AlertDialog("Авторизация", "Пользователя с таким логином или паролем не существует.");
+                }
+            } catch(JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+
+
+
