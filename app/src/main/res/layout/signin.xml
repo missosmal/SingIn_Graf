@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutAnimation="@transition/anim_setting_left"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFC107">
 
 
     <TextView

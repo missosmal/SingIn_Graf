@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutAnimation="@transition/anim_setting_right"
     android:background="#FFC107">
 
     <TextView
@@ -58,15 +59,14 @@
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/radius_button"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/radius_button"
         android:hint="Asdfg123*"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"/>
+        app:layout_constraintTop_toBottomOf="@+id/textPassword" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -100,9 +100,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/bthSignIn"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="50dp"
         android:text="Sign In"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="50dp"
         android:textColor="@color/black"
+        android:background="@drawable/radius_button"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
